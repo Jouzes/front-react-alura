@@ -5,6 +5,14 @@ import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #f4f7fb;
+  }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -23,6 +31,13 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;    
   }
 
+  ul {
+    padding: 0;
+  }
+
+  img {
+    display: block;
+  }
 
 `
 

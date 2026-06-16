@@ -3,12 +3,20 @@ import styled from 'styled-components'
 
 const LogoContainer = styled.div`
     display: flex;
-    font-size: 30px;
-    margin-right: auto;
+    align-items: center;
+    font-size: 28px;
+    color: #17324d;
+    letter-spacing: 0;
+
+    p {
+        margin: 0;
+    }
 `
 
 const LogoImage = styled.img`
-    margin-right: 10px;
+    margin-right: 12px;
+    width: 48px;
+    height: 48px;
 `
 
 function Logo() {

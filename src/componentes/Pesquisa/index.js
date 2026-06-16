@@ -4,44 +4,66 @@ import { useState } from 'react'
 import { livros } from './dadosPesquisa'
 
 const PesquisaContainer = styled.section`
-    background-image: linear-gradient(90deg, #002F52 35%, #326589 165%);
-    color: #FFF;
+    background:
+        radial-gradient(circle at top left, rgba(246, 200, 95, 0.28), transparent 34%),
+        linear-gradient(135deg, #002f52 0%, #326589 100%);
+    color: #fff;
     text-align: center;
-    padding: 85px 0;
-    height: 470px;
+    padding: 92px 24px 110px;
+    min-height: 430px;
     width: 100%;
 `
 
 const Titulo = styled.h2`
-    color: #FFF;
-    font-size: 36px;
+    color: #fff;
+    font-size: clamp(32px, 5vw, 48px);
     text-align: center;
-    width: 100%;
+    margin: 0 0 14px;
+    font-weight: 800;
 `
 
 const Subtitulo = styled.h3`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
-    margin-bottom: 40px;
+    margin: 0 0 42px;
+    color: #d8e7f2;
+`
+
+const Resultados = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
 `
 
 const Resultado = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 18px;
+    padding: 14px 18px;
+    min-width: 280px;
+    max-width: 360px;
     cursor: pointer;
+    background: #fff;
+    color: #17324d;
+    border-radius: 8px;
+    box-shadow: 0 16px 34px rgba(0, 20, 40, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     p {
-        width: 200px;
+        width: auto;
+        margin: 0;
+        font-weight: 700;
+        text-align: left;
     }
 
     img {
-        width: 100px;
+        width: 72px;
     }
 
     &:hover {
-        border: 1px solid white;
+        transform: translateY(-3px);
+        box-shadow: 0 18px 42px rgba(0, 20, 40, 0.24);
     }
 `
 
@@ -60,12 +82,14 @@ function Pesquisa() {
                     setLivrosPesquisados(resultadoPesquisa)
                 }}
             />
-            { livrosPesquisados.map( livro => (
-                <Resultado>
-                    <img src={livro.src}/>
-                    <p>{livro.nome}</p>
-                </Resultado>
-            ) ) }
+            <Resultados>
+                { livrosPesquisados.map( livro => (
+                    <Resultado key={livro.id}>
+                        <img src={livro.src} alt={livro.nome}/>
+                        <p>{livro.nome}</p>
+                    </Resultado>
+                ) ) }
+            </Resultados>
         </PesquisaContainer>
     )
 }
