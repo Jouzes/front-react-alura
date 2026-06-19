@@ -94,7 +94,7 @@ const Imagem = styled.img`
     }
 `
 
-function CardRecomenda({titulo, subtitulo, descricao, imagem}) {
+function CardRecomenda({titulo, subtitulo, descricao, imagem, altImagem}) {
     return (
         <Card>
             <Conteudo>
@@ -104,7 +104,7 @@ function CardRecomenda({titulo, subtitulo, descricao, imagem}) {
                 <Descricao>{descricao}</Descricao>
                 <Botao>Saiba mais</Botao>
             </Conteudo>
-            <Imagem src={imagem} alt={titulo} />
+            <Imagem src={imagem} alt={altImagem} />
         </Card>
     )
 }

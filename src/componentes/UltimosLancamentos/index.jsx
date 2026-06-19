@@ -1,8 +1,8 @@
-import { livros } from "./dados.js";
+import { filmes } from "./dados.js";
 import styled from "styled-components";
-import Titulo from "../Titulo/index.js";
-import CardRecomenda from "../cardRecomenda/index.js";
-import livroRecomendado from "../../imagens/livro2.png";
+import Titulo from "../Titulo";
+import CardRecomenda from "../cardRecomenda";
+import filmeRecomendado from "../../imagens/filme-recomendado.png";
 
 const LancamentosContainer = styled.section`
     padding: 56px 72px 72px;
@@ -13,7 +13,7 @@ const LancamentosContainer = styled.section`
     }
 `
 
-const ListaLivros = styled.div`
+const ListaFilmes = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 24px;
@@ -54,26 +54,27 @@ const Resultado = styled.article`
     }
 `
 
-function UlitmosLancamentos() {
+function UltimosLancamentos() {
     return (
         <LancamentosContainer>
-            <Titulo cor="#156bdc" tamanho="30px">ÚLTIMOS LANÇAMENTOS</Titulo>
-            <ListaLivros>
-                {livros.map((livro) => (
-                    <Resultado key={livro.id}>
-                        <img src={livro.src} alt={livro.nome} />
-                        <p>{livro.nome}</p>
+            <Titulo cor="#156bdc" tamanho="30px">FILMES EM DESTAQUE</Titulo>
+            <ListaFilmes>
+                {filmes.map((filme) => (
+                    <Resultado key={filme.id}>
+                        <img src={filme.src} alt={`Pôster de ${filme.nome}`} />
+                        <p>{filme.nome}</p>
                     </Resultado>
                 ))}
-            </ListaLivros>
+            </ListaFilmes>
             <CardRecomenda
                 titulo="Talvez você também goste"
-                subtitulo="Angular 11 e Firebase"
-                descricao="Construa uma aplicação integrada com recursos modernos para evoluir seus estudos de front-end."
-                imagem={livroRecomendado}
+                subtitulo="Memórias do Amanhã"
+                descricao="Um mistério de ficção científica sobre escolhas, lembranças e os caminhos que ainda não percorremos."
+                imagem={filmeRecomendado}
+                altImagem="Pôster de Memórias do Amanhã"
             />
         </LancamentosContainer>
     )
 }
 
-export default UlitmosLancamentos;
+export default UltimosLancamentos;

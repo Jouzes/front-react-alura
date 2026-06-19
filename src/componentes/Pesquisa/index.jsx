@@ -1,7 +1,7 @@
-import Input from '../Input'
-import styled from 'styled-components'
-import { useState } from 'react'
-import { livros } from './dadosPesquisa'
+import Input from '../Input';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import {getFilmes} from "../../services/filmes.jsx";
 
 const PesquisaContainer = styled.section`
     background:
@@ -68,25 +68,32 @@ const Resultado = styled.div`
 `
 
 function Pesquisa() {
-    const [livrosPesquisados, setLivrosPesquisados] = useState([])
+    const [filmesPesquisados, setFilmesPesquisados] = useState([]);
+    const [filmes, setFilmes] = useState([]);
+
+    useEffect(() => {
+        getFilmes().then((filmes) => setFilmes(filmes)).catch(console.error);
+    }, [])
 
     return (
         <PesquisaContainer>
             <Titulo>Já sabe por onde começar?</Titulo>
-            <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
+            <Subtitulo>Encontre seu próximo filme.</Subtitulo>
             <Input
-                placeholder="Escreva sua próxima leitura"
+                placeholder="Digite o nome de um filme"
                 onBlur={evento => {
                     const textoDigitado = evento.target.value
-                    const resultadoPesquisa = livros.filter( livro => livro.nome.includes(textoDigitado))
-                    setLivrosPesquisados(resultadoPesquisa)
+                    const resultadoPesquisa = filmes.filter((filme) =>
+                        filme.nome.toLowerCase().includes(textoDigitado.toLowerCase())
+                    )
+                    setFilmesPesquisados(resultadoPesquisa)
                 }}
             />
             <Resultados>
-                { livrosPesquisados.map( livro => (
-                    <Resultado key={livro.id}>
-                        <img src={livro.src} alt={livro.nome}/>
-                        <p>{livro.nome}</p>
+                {filmesPesquisados.map((filme) => (
+                    <Resultado key={filme.id}>
+                        <img src={filme.src} alt={`Pôster de ${filme.nome}`}/>
+                        <p>{filme.nome}</p>
                     </Resultado>
                 ) ) }
             </Resultados>
